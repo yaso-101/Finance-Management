@@ -33,20 +33,6 @@ const BalanceCard = ({ balance, growth = 8.5, currency }: BalanceCardProps) => {
           {formatCurrency(balance, currency)}
         </h3>
       </div>
-
-      {/* Bottom Section */}
-      <div className="flex items-center mt-auto animate-slide-up stagger-3">
-        {isPositive ? (
-          <ArrowUpRight className="h-4 w-4 mr-1 text-green-600" />
-        ) : (
-          <ArrowDownRight className="h-4 w-4 mr-1 text-red-500" />
-        )}
-        <span className={`text-sm font-medium ${isPositive ? "text-green-600" : "text-red-500"}`}>
-          {isPositive ? "+" : "-"}
-          {Math.abs(growth)}%
-        </span>
-        <span className="text-xs text-slate-500 ml-1">from last month</span>
-      </div>
     </CardContainer>
   )
 }
