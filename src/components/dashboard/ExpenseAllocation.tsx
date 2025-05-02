@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useState, useEffect } from "react"
@@ -76,11 +78,6 @@ const ExpenseAllocation = ({ allocations, currency }: ExpenseAllocationProps) =>
   const [editDialogOpen, setEditDialogOpen] = useState(false)
   const [currentEditItem, setCurrentEditItem] = useState<AllocationSuggestion | null>(null)
   const [currentEditIndex, setCurrentEditIndex] = useState<number | null>(null)
-  const [newCategoryName, setNewCategoryName] = useState("")
-  const [newCategoryIcon, setNewCategoryIcon] = useState<ExpenseCategory>("shopping")
-  const [newCategoryPercentage, setNewCategoryPercentage] = useState("0")
-  const [addDialogOpen, setAddDialogOpen] = useState(false)
-  const [currencyType, setCurrencyType] = useState<"IQD" | "$">("IQD")
 
   // Initialize custom allocations with the provided allocations
   useEffect(() => {
@@ -166,28 +163,6 @@ const ExpenseAllocation = ({ allocations, currency }: ExpenseAllocationProps) =>
     setCustomAllocations(newAllocations)
   }
 
-  // Add a new allocation
-  const handleAddAllocation = () => {
-    const percentage = Number.parseFloat(newCategoryPercentage)
-    if (newCategoryName && percentage > 0) {
-      // Calculate amount based on percentage and total
-      const totalAmount = customAllocations.reduce((sum, item) => sum + item.amount, 0)
-      const newAmount = (totalAmount / (100 - percentage)) * percentage
-
-      const newAllocation: AllocationSuggestion = {
-        category: newCategoryName.toLowerCase() as ExpenseCategory,
-        percentage: percentage,
-        amount: newAmount,
-      }
-
-      setCustomAllocations([...customAllocations, newAllocation])
-      setNewCategoryName("")
-      setNewCategoryIcon("shopping")
-      setNewCategoryPercentage("0")
-      setAddDialogOpen(false)
-    }
-  }
-
   // Open edit dialog for an allocation
   const openEditDialog = (allocation: AllocationSuggestion, index: number) => {
     setCurrentEditItem({ ...allocation })
@@ -210,7 +185,7 @@ const ExpenseAllocation = ({ allocations, currency }: ExpenseAllocationProps) =>
     <CardContainer className="h-full">
       <div className="flex justify-between items-start mb-6">
         <div>
-          <ChipLabel variant="primary" className="mb-2 animate-slide-up stagger-1">
+          <ChipLabel className="mb-2 animate-slide-up stagger-1">
             Suggested Allocation
           </ChipLabel>
           <h3 className="text-xl font-semibold animate-slide-up stagger-2">Monthly Budget</h3>
@@ -284,14 +259,6 @@ const ExpenseAllocation = ({ allocations, currency }: ExpenseAllocationProps) =>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="h-7 w-7 p-0"
-                          onClick={() => openEditDialog(allocation, index)}
-                        >
-                          <Edit className="h-3 w-3" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
                           className="h-7 w-7 p-0 text-destructive"
                           onClick={() => handleDeleteAllocation(index)}
                         >
@@ -303,84 +270,6 @@ const ExpenseAllocation = ({ allocations, currency }: ExpenseAllocationProps) =>
                 ),
             )}
           </div>
-
-          {isCustomizing && (
-            <Dialog open={addDialogOpen} onOpenChange={setAddDialogOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" size="sm" className="w-full flex items-center justify-center gap-1 mt-2">
-                  <Plus className="h-4 w-4" /> Add New Section
-                </Button>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Add New Budget Category</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid gap-2">
-                    <Label htmlFor="category-name">Category Name</Label>
-                    <Input
-                      id="category-name"
-                      value={newCategoryName}
-                      onChange={(e) => setNewCategoryName(e.target.value)}
-                      placeholder="e.g., Travel"
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="category-icon">Icon</Label>
-                    <Select
-                      value={newCategoryIcon}
-                      onValueChange={(value) => setNewCategoryIcon(value as ExpenseCategory)}
-                    >
-                      <SelectTrigger id="category-icon">
-                        <SelectValue placeholder="Select an icon" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {availableIcons.map((icon) => (
-                          <SelectItem key={icon} value={icon}>
-                            <div className="flex items-center gap-2">
-                              <CategoryIcon category={icon} />
-                              <span className="capitalize">{getShortenedCategory(icon)}</span>
-                            </div>
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-2">
-                    <div className="flex items-center justify-between">
-                      <Label htmlFor="category-percentage">Amount</Label>
-                      <div className="flex items-center border rounded-md overflow-hidden">
-                        <button
-                          type="button"
-                          className={`px-3 py-1 text-xs font-medium ${currencyType === "IQD" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
-                          onClick={() => setCurrencyType("IQD")}
-                        >
-                          IQD
-                        </button>
-                        <button
-                          type="button"
-                          className={`px-3 py-1 text-xs font-medium ${currencyType === "$" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
-                          onClick={() => setCurrencyType("$")}
-                        >
-                          $
-                        </button>
-                      </div>
-                    </div>
-                    <Input
-                      id="category-percentage"
-                      type="number"
-                      min="0"
-                      value={newCategoryPercentage}
-                      onChange={(e) => setNewCategoryPercentage(e.target.value)}
-                    />
-                  </div>
-                </div>
-                <div className="flex justify-end">
-                  <Button onClick={handleAddAllocation}>Add Category</Button>
-                </div>
-              </DialogContent>
-            </Dialog>
-          )}
 
           {isCustomizing && (
             <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>

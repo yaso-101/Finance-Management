@@ -20,7 +20,6 @@ const LoginForm = ({ onToggle }: { onToggle: () => void }) => {
       toast({
         title: "Error",
         description: "Please fill in all fields",
-        variant: "destructive",
       });
       return;
     }
@@ -33,15 +32,15 @@ const LoginForm = ({ onToggle }: { onToggle: () => void }) => {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        toast({ title: "Success", description: "Logged in! Redirecting...", variant: "default" });
+        toast({ title: "Success", description: "Logged in! Redirecting..." });
         setTimeout(() => {
           window.location.href = "/";
         }, 700);
       } else {
-        toast({ title: "Login Failed", description: data.error || "Invalid credentials", variant: "destructive" });
+        toast({ title: "Login Failed", description: data.error || "Invalid credentials" });
       }
     } catch (err) {
-      toast({ title: "Error", description: "Server error", variant: "destructive" });
+      toast({ title: "Error", description: "Server error" });
     }
   };
 

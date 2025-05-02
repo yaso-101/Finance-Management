@@ -2,5 +2,9 @@
   {
     "type": "sqlite",
     "path": "c:\\Users\\LinGREEDO\\Documents\\yassr tyeshit\\Finance-Management\\server\\users.db"
+  },
+  {
+    "type": "sqlite",
+    "path": "d:\\VSC\\NEW project\\Finance-Management\\server\\users.db"
   }
 ]

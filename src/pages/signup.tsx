@@ -20,7 +20,6 @@ const SignupForm = ({ onToggle }: { onToggle: () => void }) => {
       toast({
         title: "Error",
         description: "Please fill in all fields",
-        variant: "destructive",
       });
       return;
     }
@@ -33,14 +32,14 @@ const SignupForm = ({ onToggle }: { onToggle: () => void }) => {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        toast({ title: "Success", description: "Account created!", variant: "default" });
+        toast({ title: "Success", description: "Account created!" });
 
         onToggle();
       } else {
-        toast({ title: "Signup Failed", description: data.error || "Could not create account", variant: "destructive" });
+        toast({ title: "Signup Failed", description: data.error || "Could not create account" });
       }
     } catch (err) {
-      toast({ title: "Error", description: "Server error", variant: "destructive" });
+      toast({ title: "Error", description: "Server error" });
     }
   };
 

@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import MainLayout from "@/components/layout/MainLayout"
 import CardContainer from "@/components/common/CardContainer"
 import ChipLabel from "@/components/common/ChipLabel"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 import { useFinance } from "@/context/FinanceContext"
+import useAuthRedirect from "@/hooks/useAuthRedirect";
 
 const COLORS = ["#4F46E5", "#0EA5E9", "#10B981", "#F59E0B", "#8B5CF6", "#EF4444"]
 
 const Analysis = () => {
+  const loading = useAuthRedirect({ requireAuth: true, redirectTo: "/login" });
+
   const { yearlyData, allocationSuggestions, currency } = useFinance()
 
   // Format allocation data for pie chart
@@ -52,6 +56,10 @@ const Analysis = () => {
     return null
   }
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <MainLayout>
       <div className="flex flex-col md:flex-row items-center justify-between mb-6">
@@ -65,7 +73,7 @@ const Analysis = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <CardContainer>
-          <ChipLabel variant="primary" className="mb-2 animate-slide-up">
+          <ChipLabel className="mb-2 animate-slide-up">
             Annual Overview
           </ChipLabel>
           <h3 className="text-xl font-semibold mb-6 animate-slide-up stagger-1">Yearly Income vs Expenses</h3>
@@ -91,7 +99,7 @@ const Analysis = () => {
         </CardContainer>
 
         <CardContainer>
-          <ChipLabel variant="primary" className="mb-2 animate-slide-up">
+          <ChipLabel className="mb-2 animate-slide-up">
             Budget Breakdown
           </ChipLabel>
           <h3 className="text-xl font-semibold mb-6 animate-slide-up stagger-1">Expense Categories</h3>
@@ -122,7 +130,7 @@ const Analysis = () => {
       </div>
 
       <CardContainer>
-        <ChipLabel variant="primary" className="mb-2 animate-slide-up">
+        <ChipLabel className="mb-2 animate-slide-up">
           Savings Progress
         </ChipLabel>
         <h3 className="text-xl font-semibold mb-6 animate-slide-up stagger-1">Monthly Savings Trend</h3>

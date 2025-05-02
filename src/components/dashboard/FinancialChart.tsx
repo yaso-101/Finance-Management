@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React, { useState } from "react";
 import { 
@@ -67,7 +68,7 @@ const FinancialChart = ({ data, currency }: FinancialChartProps) => {
     <CardContainer>
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
         <div>
-          <ChipLabel variant="primary" className="mb-2 animate-slide-up">
+          <ChipLabel className="mb-2 animate-slide-up">
             Financial Overview
           </ChipLabel>
           <h3 className="text-xl font-semibold animate-slide-up stagger-1">Yearly Finance Trends</h3>

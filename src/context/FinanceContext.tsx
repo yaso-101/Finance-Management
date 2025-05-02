@@ -1,6 +1,5 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { AllocationSuggestion, ExpenseCategory, Expense, Income, generateAllocationSuggestions } from "@/utils/financeUtils";
+import { AllocationSuggestion, Expense, generateAllocationSuggestions } from "@/utils/financeUtils";
 import { CurrencyType } from "@/components/dashboard/IncomeForm";
 
 interface FinanceContextType {
@@ -21,7 +20,7 @@ interface FinanceContextType {
 const FinanceContext = createContext<FinanceContextType | undefined>(undefined);
 
 export const FinanceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [income, setIncome] = useState<number>(5000);
+  const [income, setIncome] = useState<number>(0);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [allocationSuggestions, setAllocationSuggestions] = useState<AllocationSuggestion[]>([]);
   const [currency, setCurrency] = useState<CurrencyType>("IQD");

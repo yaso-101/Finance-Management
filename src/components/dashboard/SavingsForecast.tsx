@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { useState } from "react"
@@ -56,7 +57,7 @@ const SavingsForecast = ({ monthlySavings, currency }: SavingsForecastProps) => 
           <Calculator className="h-5 w-5 text-primary" />
         </div>
         <div>
-          <ChipLabel variant="primary" className="mb-1 animate-slide-up">
+          <ChipLabel  className="mb-1 animate-slide-up">
             Future Planning
           </ChipLabel>
           <h3 className="text-xl font-semibold animate-slide-up stagger-1">Savings Forecast</h3>

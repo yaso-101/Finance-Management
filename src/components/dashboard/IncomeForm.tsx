@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import { Check, PiggyBank, DollarSign, ChevronsUpDown } from "lucide-react";
+import { Check, PiggyBank, DollarSign} from "lucide-react";
 import CardContainer from "../common/CardContainer";
 import ChipLabel from "../common/ChipLabel";
 import { toast } from "sonner";
@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { formatCurrency } from "@/lib/utils";
 import { useFinance } from "@/context/FinanceContext";
 
 interface IncomeFormProps {
@@ -49,9 +48,6 @@ const IncomeForm = ({ onSubmit }: IncomeFormProps) => {
   };
   
   // Get the currency symbol for display
-  const getCurrencySymbol = () => {
-    return currency === "USD" ? "$" : "IQD";
-  };
   
   return (
     <CardContainer>
@@ -61,7 +57,7 @@ const IncomeForm = ({ onSubmit }: IncomeFormProps) => {
             <PiggyBank className="h-5 w-5 text-primary" />
           </div>
           <div>
-            <ChipLabel variant="primary" className="mb-1 animate-slide-up">
+            <ChipLabel className="mb-1 animate-slide-up">
               Income Allocation
             </ChipLabel>
             <h3 className="text-xl font-semibold animate-slide-up stagger-1">Add Your Income</h3>
