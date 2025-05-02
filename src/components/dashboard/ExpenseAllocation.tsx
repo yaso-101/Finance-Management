@@ -316,20 +316,6 @@ const ExpenseAllocation = ({ allocations, currency }: ExpenseAllocationProps) =>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="edit-category-percentage">Amount</Label>
                         <div className="flex items-center border rounded-md overflow-hidden">
-                          <button
-                            type="button"
-                            className={`px-3 py-1 text-xs font-medium ${currencyType === "IQD" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
-                            onClick={() => setCurrencyType("IQD")}
-                          >
-                            IQD
-                          </button>
-                          <button
-                            type="button"
-                            className={`px-3 py-1 text-xs font-medium ${currencyType === "$" ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"}`}
-                            onClick={() => setCurrencyType("$")}
-                          >
-                            $
-                          </button>
                         </div>
                       </div>
                       <Input
